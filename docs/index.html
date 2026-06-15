@@ -1,0 +1,542 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="4050 아빠들을 위한 쉽고 간편한 복잡하지 않은 용돈 및 카드 지출 정리 및 가계부 앱 - 아빠 용돈">
+  <meta name="theme-color" content="#0F172A">
+  <link rel="icon" type="image/png" href="assets/favicon.png">
+  <meta property="og:title" content="아빠 용돈 - Daddy Pocket">
+  <meta property="og:description" content="복잡한 설정 없이 한눈에 보는 직관적인 용돈 관리 및 카드 결제일 안내">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://jeiel85.github.io/daddy-easy-pocket-money/">
+  <meta property="og:image" content="https://jeiel85.github.io/daddy-easy-pocket-money/docs/assets/feature-graphic.png">
+  <title>아빠 용돈 - Daddy Pocket</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=Outfit:wght@300;400;600;800&family=Noto+Sans+KR:wght@300;400;700&display=swap" rel="stylesheet">
+  
+  <style>
+    :root {
+      --slate-dark: #0F172A;
+      --slate-card: rgba(30, 41, 59, 0.7);
+      --border-color: rgba(255, 255, 255, 0.08);
+      --primary-navy: #1E3A8A;
+      --accent-teal: #2DD4BF;
+      --accent-gold: #FBBF24;
+      --alert-red: #EF4444;
+      --saving-green: #10B981;
+      --text-primary: #F8FAFC;
+      --text-secondary: #94A3B8;
+      --shadow: 0 24px 60px rgba(0, 0, 0, 0.5);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background-color: var(--slate-dark);
+      color: var(--text-primary);
+      font-family: 'Outfit', 'Noto Sans KR', 'Inter', sans-serif;
+      line-height: 1.6;
+      overflow-x: hidden;
+      background-image: 
+        radial-gradient(circle at 10% 20%, rgba(30, 58, 138, 0.25), transparent 45%),
+        radial-gradient(circle at 90% 80%, rgba(45, 212, 191, 0.08), transparent 45%);
+    }
+
+    .shell {
+      width: min(1200px, calc(100% - 48px));
+      margin: 0 auto;
+    }
+
+    /* Navigation */
+    header {
+      border-bottom: 1px solid var(--border-color);
+      backdrop-filter: blur(12px);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(15, 23, 42, 0.85);
+    }
+
+    .nav-container {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 20px 0;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-weight: 800;
+      font-size: 1.4rem;
+      letter-spacing: -0.5px;
+      color: var(--text-primary);
+      text-decoration: none;
+    }
+
+    .brand img {
+      width: 32px;
+      height: 32px;
+      border-radius: 8px;
+    }
+
+    .brand span {
+      background: linear-gradient(135deg, var(--text-primary), var(--accent-teal));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 24px;
+    }
+
+    .nav-links a {
+      color: var(--text-secondary);
+      text-decoration: none;
+      font-size: 0.95rem;
+      transition: color 0.3s;
+    }
+
+    .nav-links a:hover {
+      color: var(--text-primary);
+    }
+
+    .lang-btn {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid var(--border-color);
+      color: var(--text-primary);
+      padding: 6px 12px;
+      border-radius: 20px;
+      font-size: 0.85rem;
+      cursor: pointer;
+      transition: background 0.3s;
+      font-family: inherit;
+    }
+
+    .lang-btn:hover {
+      background: rgba(255, 255, 255, 0.1);
+    }
+
+    /* Hero Section */
+    .hero {
+      padding: 80px 0 60px 0;
+      text-align: center;
+    }
+
+    .hero h1 {
+      font-size: clamp(2.5rem, 6vw, 4rem);
+      font-weight: 800;
+      line-height: 1.2;
+      margin-bottom: 24px;
+      letter-spacing: -1px;
+    }
+
+    .hero h1 span {
+      background: linear-gradient(135deg, var(--accent-teal), var(--accent-gold));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .hero p {
+      font-size: clamp(1.1rem, 3vw, 1.4rem);
+      color: var(--text-secondary);
+      max-width: 700px;
+      margin: 0 auto 40px auto;
+      font-weight: 300;
+    }
+
+    /* Phone Mockup */
+    .mockup-container {
+      background: var(--slate-card);
+      border: 1px solid var(--border-color);
+      border-radius: 36px;
+      padding: 40px;
+      max-width: 480px;
+      margin: 0 auto 80px auto;
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(20px);
+      position: relative;
+    }
+
+    .phone-screen {
+      background: #0F172A;
+      border-radius: 24px;
+      border: 4px solid #1E293B;
+      padding: 20px;
+      color: var(--text-primary);
+      font-family: 'Noto Sans KR', sans-serif;
+      text-align: left;
+    }
+
+    .phone-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20px;
+      padding-bottom: 10px;
+      border-bottom: 1px solid rgba(255,255,255,0.05);
+    }
+
+    .phone-title {
+      font-weight: 800;
+      font-size: 1.2rem;
+      background: linear-gradient(135deg, #FFF, var(--accent-teal));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .card-alert {
+      background: rgba(239, 68, 68, 0.15);
+      border: 1px solid rgba(239, 68, 68, 0.3);
+      border-radius: 12px;
+      padding: 12px 16px;
+      margin-bottom: 16px;
+      font-size: 0.85rem;
+    }
+
+    .card-alert-title {
+      color: var(--alert-red);
+      font-weight: bold;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      margin-bottom: 4px;
+    }
+
+    .budget-card {
+      background: #1E293B;
+      border-radius: 16px;
+      padding: 20px;
+      text-align: center;
+      margin-bottom: 20px;
+      box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+    }
+
+    .budget-label {
+      font-size: 0.85rem;
+      color: var(--text-secondary);
+      margin-bottom: 4px;
+    }
+
+    .budget-value {
+      font-size: 2rem;
+      font-weight: 900;
+      color: var(--saving-green);
+      margin-bottom: 12px;
+    }
+
+    .progress-bar-container {
+      background: rgba(255,255,255,0.05);
+      border-radius: 8px;
+      height: 12px;
+      overflow: hidden;
+      margin-bottom: 8px;
+    }
+
+    .progress-bar-fill {
+      background: var(--accent-teal);
+      width: 65%;
+      height: 100%;
+      border-radius: 8px;
+    }
+
+    .budget-info {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.75rem;
+      color: var(--text-secondary);
+    }
+
+    .quick-input-btn {
+      background: linear-gradient(135deg, var(--accent-teal), #0F766E);
+      color: #0F172A;
+      font-weight: 800;
+      padding: 14px;
+      border-radius: 12px;
+      text-align: center;
+      font-size: 0.95rem;
+      cursor: pointer;
+      box-shadow: 0 4px 12px rgba(45, 212, 191, 0.3);
+      transition: transform 0.2s;
+    }
+
+    .quick-input-btn:hover {
+      transform: translateY(-2px);
+    }
+
+    /* Features Section */
+    .features {
+      padding: 80px 0;
+    }
+
+    .section-title {
+      text-align: center;
+      font-size: clamp(2rem, 4vw, 2.8rem);
+      font-weight: 800;
+      margin-bottom: 60px;
+    }
+
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 32px;
+    }
+
+    .feature-card {
+      background: var(--slate-card);
+      border: 1px solid var(--border-color);
+      border-radius: 24px;
+      padding: 32px;
+      transition: transform 0.3s, border-color 0.3s;
+      backdrop-filter: blur(10px);
+    }
+
+    .feature-card:hover {
+      transform: translateY(-5px);
+      border-color: rgba(45, 212, 191, 0.25);
+    }
+
+    .feature-icon {
+      width: 48px;
+      height: 48px;
+      border-radius: 12px;
+      background: rgba(45, 212, 191, 0.1);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 24px;
+      color: var(--accent-teal);
+      font-size: 1.5rem;
+    }
+
+    .feature-card h3 {
+      font-size: 1.3rem;
+      font-weight: 700;
+      margin-bottom: 12px;
+    }
+
+    .feature-card p {
+      color: var(--text-secondary);
+      font-size: 0.95rem;
+      font-weight: 300;
+    }
+
+    /* Privacy Banner */
+    .privacy-box {
+      background: linear-gradient(135deg, rgba(30, 58, 138, 0.3), rgba(15, 23, 42, 0.8));
+      border: 1px solid rgba(45, 212, 191, 0.15);
+      border-radius: 24px;
+      padding: 40px;
+      text-align: center;
+      margin: 80px 0;
+      backdrop-filter: blur(15px);
+    }
+
+    .privacy-box h2 {
+      font-size: 1.8rem;
+      margin-bottom: 16px;
+      color: var(--accent-teal);
+    }
+
+    .privacy-box p {
+      max-width: 800px;
+      margin: 0 auto;
+      color: var(--text-secondary);
+      font-size: 1rem;
+    }
+
+    /* Footer */
+    footer {
+      border-top: 1px solid var(--border-color);
+      padding: 40px 0;
+      text-align: center;
+      color: var(--text-secondary);
+      font-size: 0.9rem;
+    }
+
+    .footer-links {
+      margin-top: 16px;
+      display: flex;
+      justify-content: center;
+      gap: 24px;
+    }
+
+    .footer-links a {
+      color: var(--text-secondary);
+      text-decoration: none;
+      transition: color 0.3s;
+    }
+
+    .footer-links a:hover {
+      color: var(--text-primary);
+    }
+
+    /* Language Switcher Styling support */
+    [data-lang="en"] {
+      display: none;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="shell nav-container">
+      <a href="#" class="brand">
+        <img src="assets/favicon.png" alt="아빠 용돈">
+        <span>아빠 용돈</span>
+      </a>
+      <div class="nav-links">
+        <a href="#features" class="nav-feature-link">주요 기능</a>
+        <a href="privacy.html">개인정보처리방침</a>
+        <button class="lang-btn" onclick="toggleLanguage()">English</button>
+      </div>
+    </div>
+  </header>
+
+  <main class="shell">
+    <!-- Hero -->
+    <section class="hero">
+      <h1 class="lang-ko">4050 아빠들을 위한<br><span>가장 쉬운 용돈 가계부</span></h1>
+      <h1 class="lang-en" data-lang="en">The Simplest Budget App<br><span>Tailored for Dads</span></h1>
+      
+      <p class="lang-ko">복잡한 자산 연동 없이 이번 달 남은 내 용돈과 다가오는 카드 값만 확실하게 챙겨 드립니다.</p>
+      <p class="lang-en" data-lang="en" style="display:none;">Track your remaining pocket money budget and card billing dates instantly without complex account syncing.</p>
+    </section>
+
+    <!-- Phone Mockup -->
+    <section class="mockup-container">
+      <div class="phone-screen">
+        <div class="phone-header">
+          <div class="phone-title lang-ko">아빠 용돈</div>
+          <div class="phone-title lang-en" data-lang="en">Daddy Pocket</div>
+          <span style="font-size:0.75rem; color: var(--text-secondary);">2026년 6월</span>
+        </div>
+        
+        <!-- Danger Alert -->
+        <div class="card-alert">
+          <div class="card-alert-title">
+            ⚠️ <span class="lang-ko">다가오는 카드 결제일</span><span class="lang-en" data-lang="en">Upcoming Payment Day</span>
+          </div>
+          <div style="font-size:0.8rem; font-weight: 500;" class="lang-ko">신한카드 (25일) 결제 예정입니다.</div>
+          <div style="font-size:0.8rem; font-weight: 500;" class="lang-en" data-lang="en">Shinhan Card (25th) is approaching.</div>
+        </div>
+
+        <!-- Budget Gauge -->
+        <div class="budget-card">
+          <div class="budget-label lang-ko">이번 달 남은 내 용돈</div>
+          <div class="budget-label lang-en" data-lang="en">My Remaining Budget</div>
+          <div class="budget-value">325,000원</div>
+          <div class="progress-bar-container">
+            <div class="progress-bar-fill"></div>
+          </div>
+          <div class="budget-info">
+            <span class="lang-ko">지출률 35%</span><span class="lang-en" data-lang="en">Spent 35%</span>
+            <span>예산: 500,000원</span>
+          </div>
+        </div>
+
+        <div class="quick-input-btn lang-ko">⚡ 빠른 지출 입력</div>
+        <div class="quick-input-btn lang-en" data-lang="en">⚡ Quick Add Expense</div>
+      </div>
+    </section>
+
+    <!-- Features -->
+    <section id="features" class="features">
+      <h2 class="section-title lang-ko">더 뺄 것이 없는 핵심 기능</h2>
+      <h2 class="section-title lang-en" data-lang="en">Essential Features Only</h2>
+      
+      <div class="features-grid">
+        <!-- F1 -->
+        <div class="feature-card">
+          <div class="feature-icon">💵</div>
+          <h3 class="lang-ko">남은 용돈 한눈에</h3>
+          <h3 class="lang-en" data-lang="en">Budget Balance</h3>
+          <p class="lang-ko">메인 화면에 이번 달 사용할 수 있는 남은 용돈을 큼직하게 띄워 드립니다. 지출 금액만 빠르게 적어 나가세요.</p>
+          <p class="lang-en" data-lang="en">Displays your remaining monthly pocket money clearly. No calculations, just input your spendings.</p>
+        </div>
+        <!-- F2 -->
+        <div class="feature-card">
+          <div class="feature-icon">📅</div>
+          <h3 class="lang-ko">카드 결제일 3일 전 알림</h3>
+          <h3 class="lang-en" data-lang="en">Card Billing Alerts</h3>
+          <p class="lang-ko">신용카드 정산일을 미리 등록해 두면 결제일 3일 전에 홈 화면 경고 배너로 먼저 알려 드립니다.</p>
+          <p class="lang-en" data-lang="en">Set card payment dates and get warning alerts on the home screen 3 days prior, plus system push notifications.</p>
+        </div>
+        <!-- F3 -->
+        <div class="feature-card">
+          <div class="feature-icon">🔄</div>
+          <h3 class="lang-ko">반복 고정비 자동 등록</h3>
+          <h3 class="lang-en" data-lang="en">Recurring Expenses</h3>
+          <p class="lang-ko">통신비, 넷플릭스 등 고정적으로 매달 나가는 요금을 등록하면 매달 초 자동으로 지출로 기입됩니다.</p>
+          <p class="lang-en" data-lang="en">Automates monthly bills (phone bills, Netflix, car insurance) by automatically adding them at the start of each month.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Privacy Banner -->
+    <section class="privacy-box">
+      <h2 class="lang-ko">🔒 100% 개인정보 보장 (로컬 우선)</h2>
+      <h2 class="lang-en" data-lang="en">🔒 100% Offline & Secure</h2>
+      <p class="lang-ko">어떤 지출 정보나 신용카드 데이터도 서버로 전송하지 않습니다. 모든 자료는 오직 아버님의 스마트폰 보안 저장소 안에만 안전하게 로컬로 보존됩니다.</p>
+      <p class="lang-en" data-lang="en">We do not transmit or upload any of your transactions or credit card information. All data is kept 100% locally inside your smartphone.</p>
+    </section>
+  </main>
+
+  <footer>
+    <div class="shell">
+      <p>&copy; 2026 Sitdory. All Rights Reserved.</p>
+      <div class="footer-links">
+        <a href="privacy.html" class="lang-ko">개인정보처리방침</a>
+        <a href="privacy.html" class="lang-en" data-lang="en">Privacy Policy</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    let currentLang = 'ko';
+
+    function toggleLanguage() {
+      const koElems = document.querySelectorAll('.lang-ko, .nav-feature-link');
+      const enElems = document.querySelectorAll('.lang-en, [data-lang="en"]');
+      const langBtn = document.querySelector('.lang-btn');
+
+      if (currentLang === 'ko') {
+        koElems.forEach(el => {
+          if (el.classList.contains('nav-feature-link')) {
+            el.textContent = 'Features';
+          } else {
+            el.style.display = 'none';
+          }
+        });
+        enElems.forEach(el => el.style.display = 'block');
+        langBtn.textContent = '한국어';
+        currentLang = 'en';
+      } else {
+        koElems.forEach(el => {
+          if (el.classList.contains('nav-feature-link')) {
+            el.textContent = '주요 기능';
+          } else {
+            el.style.display = 'block';
+          }
+        });
+        enElems.forEach(el => el.style.display = 'none');
+        langBtn.textContent = 'English';
+        currentLang = 'ko';
+      }
+    }
+  </script>
+</body>
+</html>

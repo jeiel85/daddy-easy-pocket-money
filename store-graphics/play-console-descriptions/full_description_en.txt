@@ -1,0 +1,30 @@
+Introducing 'Daddy Pocket' (Daddy's Easy Pocket Money) – the easy, intuitive pocket money tracking and card payment reminder app designed specifically for dads!
+
+Have you ever given up on budgeting because of complex bank syncing, infinite category options, or confusing charts?
+'Daddy Pocket' eliminates unnecessary clutter and focuses entirely on the essential features that dads actually need.
+
+■ Key Features
+1. **My Remaining Budget at a Glance**
+- Set your monthly pocket money budget, and see your remaining balance displayed clearly on the home screen.
+- No complex math needed – just open the app and see how much you can spend.
+
+2. **Simple Expense Logs**
+- Quickly log expenses by selecting the amount, category, and payment method (cash/card).
+- Minimizing input fields makes daily tracking effortless.
+
+3. **Fixed Expense Automation**
+- Register recurring monthly bills such as mobile plans, streaming subscriptions, and car insurance. The app will automatically log them on the first day of each month.
+
+4. **Card Payment Reminders**
+- Displays a warning banner at the top of the Home screen 3 days prior to your credit card payment dates and sends push notifications.
+- Never miss a payment deadline again.
+
+5. **Clean Analytics & Settings**
+- Review your spending habits categorized in a clean pie chart.
+- Update your monthly budget anytime with a simple slider.
+
+■ Secure & Private (Local-First)
+- All your spending data and credit card details are stored securely inside your device's local database (Room/SQLite).
+- We do not transmit or collect any of your personal data on external servers – 100% offline and secure.
+
+Download 'Daddy Pocket' today and start stress-free, simple budget management!

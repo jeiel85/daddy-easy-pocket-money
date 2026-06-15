@@ -1,6 +1,0 @@
-{
-  "name": "아빠 용돈",
-  "description": "4050 아빠들을 위한 쉽고 간편한 복잡하지 않은 용돈 및 카드 지출 정리 및 가계부 앱",
-  "requestFramePermissions": [],
-  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
-}

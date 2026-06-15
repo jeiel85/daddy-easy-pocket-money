@@ -1,0 +1,14 @@
+<ko-KR>
+- 첫 번째 정식 출시!
+- 4050 아빠들을 위한 쉽고 직관적인 용돈 관리 및 카드 결제일 알림 기능 지원.
+- 매월 반복되는 고정 지출 자동 등록 및 관리 기능.
+- 카드 결제일 3일 전 홈 화면 경고 배너 및 시스템 푸시 알림 기능.
+- 복잡함을 줄이고 편의성을 높인 한눈에 보는 월간 지출 분석.
+</ko-KR>
+<en-US>
+- First official release!
+- Easy and intuitive pocket money tracking & card payment reminders tailored for dads.
+- Automatic registration and management of recurring fixed expenses.
+- Warning banner on Home screen and system push notifications 3 days before card payment day.
+- Simplified monthly expense analytics to reduce complexity and improve readability.
+</en-US>
